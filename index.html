@@ -43,7 +43,7 @@
                       <!-- ko if: activations().length > 0 -->
                       <br/><b>Abilities</b><br />
                       <!-- ko foreach: activations -->
-                        <button class="btn btn-xs btn-warning" data-bind=", click: effect, text: effectName, attr: {disabled: !canActivate()}"></button>
+                        <button class="btn btn-xs btn-warning" data-bind="click: effect, text: effectName, attr: {disabled: !canActivate()}"></button>
                       <!-- /ko -->
                       <br/>
                       <!-- /ko -->
@@ -72,7 +72,7 @@
                     Cost: <span data-bind="text: cost"></span> Energy<br>
                     Effect: <span data-bind="text: effect"></span><br>
                     <button class="btn btn-success" data-bind=
-                    " click: function() { buy($parent, $parents[1].playerDetails.currentPlayer, $parents[1].playerDetails.players) }, visible: $parents[1].turnEnd.canBuy() && $parents[1].playerDetails.currentPlayer().energy() &gt;= cost - $parents[1].playerDetails.currentPlayer().discount()">
+                    " click: function() { buy($parent, $parents[1].playerDetails.currentPlayer, $parents[1].playerDetails.players, $parents[1].rolling, $parents[1].turnEnd) }, visible: $parents[1].turnEnd.canBuy() && $parents[1].playerDetails.currentPlayer().energy() &gt;= cost - $parents[1].playerDetails.currentPlayer().discount()">
                     Buy</button>
                 </div>
             </div>
@@ -86,17 +86,25 @@
 
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-4" data-bind="foreach: dice">
+                <div class="col-md-4" data-bind="foreach: dice, visible: !rolling.changingRoll()">
                     <button class="btn col-md-2" data-bind=
                     "text: faceShowing, css: {'btn-success': kept, 'btn-default': !kept()}, click: toggleKept">
                     </button>
                 </div>
 
+                <div class="col-md-4" data-bind="foreach: dice, visible: rolling.changingRoll">
+                    <select class="btn col-md-2" data-bind=
+                    "options: faces, value: faceShowing, css: {'btn-success': kept, 'btn-default': !kept()}, click: toggleKept">
+                  </select>
+                </div>
+
                 <div class="col-md-2">
                     <button class="btn btn-large" data-bind=
-                    "visible: rolling.rerollsLeft() && !turnEnd.turnOver(), click: rolling.reroll">
+                    "visible: rolling.rerollsLeft() && !turnEnd.turnOver(), click: rolling.reroll,
+                    attr: {'disabled': rolling.changingRoll}">
                     Reroll</button> <button class="btn btn-large" data-bind=
-                    "visible: !turnEnd. turnOver(), click: turnEnd.claim">Claim</button>
+                    "visible: !turnEnd. turnOver(), click: turnEnd.claim,
+                     attr: {'disabled': rolling.changingRoll}">Claim</button>
                 </div>
 
             </div>
@@ -107,7 +115,7 @@
             <div class="row">
 
                 <div class="player-info bg-success col-md-3" data-bind=
-                "visible: !isTokyoInDispute()">
+                "visible: canBuy">
                     <h2>Turn Over</h2>This is your chance to buy any cards with
                     your energy.<br>
                     <button class="btn btn-success" data-bind=
@@ -127,10 +135,12 @@
                 </div>
 
 
-                <div class="player-info bg-info col-md-3" data-bind=
-                "with: turnResult">
+                <div class="player-info bg-info col-md-3">
                     <h3>Results</h3>
-                    <table class="table table-border table-condensed">
+                    <div data-bind="visible: !pointsTallied()">
+                      <button class="btn btn-xl btn-primary" data-bind="click: tallyPoints">Resolve Dice</button>
+                    </div>
+                    <table class="table table-border table-condensed" data-bind="visible: pointsTallied, with: turnResult">
                         <thead>
                             <tr>
                                 <th>Points</th>
@@ -139,7 +149,7 @@
                                 <th>Healed</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody data-bind="if: $parent.pointsTallied">
                             <tr>
                                 <td><span data-bind=
                                 "text: pointsWon"></span></td>

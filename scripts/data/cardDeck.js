@@ -9,7 +9,8 @@ define(["ko", "lodash",
 "cards/tanks", "cards/vastStorm", "cards/evacuationOrders",
 "cards/energyHoarder", "cards/friendOfChildren", "cards/dedicatedNewsTeam",
 "cards/fireBlast", "cards/armorPlating", "cards/gourmet",
-"cards/highAltitudeBombing", "cards/heal", "cards/nuclearPowerPlant"],
+"cards/highAltitudeBombing", "cards/heal", "cards/nuclearPowerPlant",
+"cards/plotTwist"],
 function(ko, _,
   completeDestruction, evenBigger, extraHead,
   gasRefinery, giantBrain, apartmentBuilding,
@@ -21,17 +22,19 @@ function(ko, _,
   tanks, vastStorm, evacuationOrders,
   energyHoarder, friendOfChildren, dedicatedNewsTeam,
   fireBlast, armorPlating, gourmet,
-  highAltitudeBombing, heal, nuclearPowerPlant) {
+  highAltitudeBombing, heal, nuclearPowerPlant,
+  plotTwist) {
 
 //TODO: EnergyHoarder + FriendOfChildren interaction
 
-  var cardsInDeck = [completeDestruction, evenBigger, extraHead, gasRefinery,
+var cardsInDeck = [plotTwist]
+  var z = [completeDestruction, evenBigger, extraHead, gasRefinery,
     giantBrain, apartmentBuilding, alienMetabolism, alphaMonster,
     acidAttack, commuterTrain, cornerStore, energize, herbivore,
     jetFighters, nationalGuard, omnivore, poisonQuills, rapidHealing,
     regeneration, skyscraper, spikedTail, tanks, vastStorm, evacuationOrders,
     dedicatedNewsTeam, fireBlast, armorPlating, gourmet, highAltitudeBombing,
-    heal, nuclearPowerPlant];
+    heal, nuclearPowerPlant, plotTwist];
   var cardsToSell = ko.observableArray([]);
 
   var addCardToSell = function() {
