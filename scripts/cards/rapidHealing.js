@@ -19,7 +19,7 @@ define(["ko", "cards/cardInterface", "util/min"], function(ko, Card, min) {
           effect: function() {
             if(canActivate()) {
             currentPlayer.energy(currentPlayer.energy() - 2);
-            currentPlayer.health(min(currentPlayer.health() + 1, currentPlayer.maxHealth()));
+            currentPlayer.heal(1);
           }
         }}
       );

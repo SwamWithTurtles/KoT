@@ -27,9 +27,13 @@ define(["ko", "util/min"], function(ko, min) {
         stats.energy(stats.energy() + scores.energyGained);
 
         if (!stats.isInTokyo()) {
-          stats.health(min(stats.health() + scores.healedFor, maxHealth()));
+            stats.heal(scores.healedFor);
         }
       }
+    }
+
+    stats.heal = function(heal) {
+      stats.health(min(stats.health() + heal, maxHealth()));
     }
 
     stats.addPoints = function(points) {
@@ -40,7 +44,7 @@ define(["ko", "util/min"], function(ko, min) {
 
     stats.takeDamage = function(damage) {
       if (stats.alive()) {
-        if(armorPlating && damage === 1) {return;}
+        if(armorPlating() && damage === 1) {return;}
         stats.health(stats.health() - damage);
       }
     }
