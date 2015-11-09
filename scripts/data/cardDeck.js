@@ -6,7 +6,8 @@ define(["ko", "lodash",
 "cards/herbivore", "cards/jetFighters", "cards/nationalGuard",
 "cards/omnivore", "cards/poisonQuills", "cards/rapidHealing",
 "cards/regeneration", "cards/skyscraper", "cards/spikedTail",
-"cards/tanks", "cards/vastStorm", "cards/evacuationOrders"],
+"cards/tanks", "cards/vastStorm", "cards/evacuationOrders",
+"cards/energyHoarder"],
 function(ko, _,
   completeDestruction, evenBigger, extraHead,
   gasRefinery, giantBrain, apartmentBuilding,
@@ -15,9 +16,11 @@ function(ko, _,
   herbivore, jetFighters, nationalGuard,
   omnivore, poisonQuills, rapidHealing,
   regeneration, skyscraper, spikedTail,
-  tanks, vastStorm, evacuationOrders) {
+  tanks, vastStorm, evacuationOrders,
+  energyHoarder) {
 
-  var cardsInDeck = [completeDestruction, evenBigger, extraHead, gasRefinery,
+var cardsInDeck = [energyHoarder]
+  var x = [completeDestruction, evenBigger, extraHead, gasRefinery,
     giantBrain, apartmentBuilding, alienMetabolism, alphaMonster,
     acidAttack, commuterTrain, cornerStore, energize, herbivore,
     jetFighters, nationalGuard, omnivore, poisonQuills, rapidHealing,
