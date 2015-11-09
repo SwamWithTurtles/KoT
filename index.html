@@ -40,9 +40,17 @@
                     Health: <span data-bind="text: health"></span><br>
                     Points: <span data-bind="text: points"></span><br>
                     Energy: <span data-bind="text: energy"></span><br>
+<!-- ko if: activations().length > 0 -->
+<br/><b>Abilities</b><br />
+<!-- ko foreach: activations -->
+  <button class="btn btn-xs btn-warning" data-bind=", click: effect, text: effectName, attr: {disabled: !canActivate()}"></button>
+<!-- /ko -->
+<br/>
+<!-- /ko -->
                     <!-- ko if: cards().length > 0 -->
                     <br>
-                    <b>Cards</b> <!-- ko foreach: cards -->
+                    <b>Cards</b>
+                    <!-- ko foreach: cards -->
                     <br>
                     <b><span data-bind="text: name"></span></b>
                     (<span data-bind="text: shortEffect"></span>) <!-- /ko -->
