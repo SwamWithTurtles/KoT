@@ -8,9 +8,9 @@ define(["ko", "phases/scoring", "data/die", "phases/fighting"], function(ko, sco
     var nextTurn = function() {
       turnOver(false);
       dice([new Die(), new Die(), new Die(), new Die(), new Die(), new Die()]);
-      resetRerolls();
-      playerDetails.advancePlayerTurn();
-
+      var currentPlayer = playerDetails.advancePlayerTurn();
+      console.log(currentPlayer.rerolls());
+      resetRerolls(currentPlayer.rerolls());
     }
 
     var claim = function() {

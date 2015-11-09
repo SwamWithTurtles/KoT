@@ -15,8 +15,8 @@ define(["ko", "data/die"], function(ko, Die) {
     return {
       rerollsLeft: rerollsLeft,
       reroll: reroll,
-      resetRerolls: function() {
-        rerollsLeft(2);
+      resetRerolls: function(rolls) {
+        rerollsLeft(rolls);
       }
     }
   }

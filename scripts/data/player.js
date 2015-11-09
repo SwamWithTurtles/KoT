@@ -11,6 +11,7 @@ define(["ko", "util/min"], function(ko, min) {
       currentPlayer: ko.observable(false),
       isInTokyo: ko.observable(false),
       cards: ko.observableArray(),
+      rerolls: ko.observable(2),
       additionalScoring: ko.observableArray()
     }
 

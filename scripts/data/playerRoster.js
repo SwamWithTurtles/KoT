@@ -74,6 +74,7 @@ define(["ko"], function(ko) {
         if (currentPlayer().isInTokyo()) {
           currentPlayer().addPoints(2);
         }
+        return currentPlayer();
       },
       currentPlayer: currentPlayer,
       moveIntoTokyo: function(player) {
