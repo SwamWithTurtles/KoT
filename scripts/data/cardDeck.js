@@ -1,14 +1,15 @@
 define(["ko", "lodash",
 "cards/completeDestruction", "cards/evenBigger", "cards/extraHead",
 "cards/gasRefinery", "cards/giantBrain", "cards/apartmentBuilding",
-"cards/alienMetabolism"],
+"cards/alienMetabolism", "cards/alphaMonster", "cards/acidAttack"],
 function(ko, _,
   completeDestruction, evenBigger, extraHead,
   gasRefinery, giantBrain, apartmentBuilding,
-  alienMetabolism) {
+  alienMetabolism, alphaMonster, acidAttack) {
 
   var cardsInDeck = [completeDestruction, evenBigger, extraHead, gasRefinery,
-    giantBrain, apartmentBuilding, alienMetabolism];
+    giantBrain, apartmentBuilding, alienMetabolism, alphaMonster,
+    acidAttack];
   var cardsToSell = ko.observableArray([]);
 
   var addCardToSell = function() {

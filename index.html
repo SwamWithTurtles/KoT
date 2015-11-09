@@ -1,7 +1,12 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <script src="bower_components/requirejs/require.js" data-main="scripts/main"></script>
-    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+
+    <script data-main="scripts/main" src=
+    "bower_components/requirejs/require.js">
+    </script>
+    <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel=
+    "stylesheet" type="text/css">
     <style>
         body {
             margin: 15px;
@@ -13,107 +18,138 @@
           margin: 3px;
         }
     </style>
+    <title></title>
 </head>
 <body>
-  <div data-bind="visible: playerDetails.gameOver" class="player-info bg-warning">
-    <h2>The Game Is Over!</h2>
+    <div class="player-info bg-warning" data-bind=
+    "visible: playerDetails.gameOver">
+        <h2>The Game Is Over!</h2>
+        <p>Congratulations, <b data-bind=
+        "text: playerDetails.winner"></b></p><button class="btn btn-primary"
+        onclick="location.reload()">Play Again?</button>
+    </div>
+    <div class="player-info" data-bind=
+    "style: {opacity: playerDetails.gameOver() ? 0.4 : 1}">
+        <h2>Players</h2><!-- ko with: playerDetails -->
+        <div class="container-fluid">
+            <div class="row" data-bind="foreach: players">
+                <div class="player-info col-md-3" data-bind=
+                "css: {'bg-warning': currentPlayer, 'bg-info': !currentPlayer(), 'bg-danger': !alive()}, style: {opacity: alive() ? 1 : 0.4}">
+                <b><span data-bind="text: name"></span> <span data-bind=
+                "visible: isInTokyo">(in Tokyo)</span></b><br>
+                    Health: <span data-bind="text: health"></span><br>
+                    Points: <span data-bind="text: points"></span><br>
+                    Energy: <span data-bind="text: energy"></span><br>
+                    <!-- ko if: cards().length > 0 -->
+                    <br>
+                    <b>Cards</b> <!-- ko foreach: cards -->
+                    <br>
+                    <b><span data-bind="text: name"></span></b>
+                    (<span data-bind="text: shortEffect"></span>) <!-- /ko -->
+                     <!-- /ko -->
+                </div>
+            </div>
+        </div><!-- /ko -->
+        <h2>Cards For Purchase</h2>
 
-    <p>Congratulations, <b data-bind="text: playerDetails.winner"></b></p>
+        <!--ko with: cardDeck-->
+        <div class="container-fluid">
 
-      <button class="btn btn-primary" onclick="location.reload()">Play Again?</button>
-  </div>
-
-  <div class="player-info" data-bind="style: {opacity: playerDetails.gameOver() ? 0.4 : 1}">
-  <h2>Players</h2>
-
-  <!-- ko with: playerDetails -->
-  <div class="container-fluid" >
-    <div class="row" data-bind="foreach: players">
-    <div class="player-info col-md-3", data-bind="css: {'bg-warning': currentPlayer, 'bg-info': !currentPlayer(), 'bg-danger': !alive()}, style: {opacity: alive() ? 1 : 0.4}">
-    <b><span data-bind="text: name"></span><span data-bind="visible: isInTokyo"> (in Tokyo)</span></b><br/>
-    Health: <span data-bind="text: health"></span><br/>
-    Points: <span data-bind="text: points"></span><br/>
-    Energy: <span data-bind="text: energy"></span><br/>
-
-    <!-- ko if: cards().length > 0 -->
-    <br/><b>Cards</b>
-    <!-- ko foreach: cards -->
-    <br/><b><span data-bind="text: name"></span></b> (<span data-bind="text: shortEffect"></span>)
-    <!-- /ko -->
-    <!-- /ko -->
-
-  </div>
-  </div>
-</div>
-  <!-- /ko -->
-
-  <h2>Cards For Purchase</h2>
-  <!--ko with: cardDeck-->
-  <div class="container-fluid" >
-    <div class="row" data-bind="foreach: cardsToSell">
-    <div class="player-info bg-info col-md-2">
-    <b><h3 data-bind="text: name"></h3> <span data-bind="if: keep">[KEEP]</span> <span data-bind="if: !keep">[DISCARD]</span></b><br/>
-    Cost: <span data-bind="text: cost"></span> Energy<br/>
-    Effect: <span data-bind="text: effect"></span><br/>
-    <button class="btn btn-success" data-bind="
-      click: function() { buy($parent, $parents[1].playerDetails.currentPlayer, $parents[1].playerDetails.players) },
-      visible: $parents[1].turnEnd.canBuy && $parents[1].playerDetails.currentPlayer().energy() >= cost - $parents[1].playerDetails.currentPlayer().discount()">Buy</button>
-  </div>
-</div>
-  </div>
-  <!-- /ko -->
-
-  <h2>Dice</h2>   <b>Rerolls Left:</b> <span data-bind="text: rolling.rerollsLeft()"></span><br/>
-
-<div class="container-fluid">
-  <div class="row">
-  <div class="col-md-4" data-bind="foreach: dice">
-      <button class="btn col-md-2" data-bind="text: faceShowing, css: {'btn-success': kept, 'btn-default': !kept()}, click: toggleKept"></span>
-  </div>
-
-    <button class="btn btn-large" data-bind="visible: rolling.rerollsLeft() && !turnEnd.turnOver(), click: rolling.reroll">Reroll</button>
-
-<!-- ko with: turnEnd -->
-<button class="btn btn-large" data-bind="visible: !turnOver(), click: claim">Claim</button>
-
-<h2>Turn Over</h2>
-  <div class="container-fluid" data-bind="if: turnOver">
-    <div class="row">
-
-  <div class="player-info bg-success col-md-3" data-bind="visible: !isTokyoInDispute()">
-    This is your chance to buy any cards with your energy. <br/>
-    <button class="btn btn-success" data-bind="click: nextTurn">Move on to Next Turn</button>
-  </div>
-
-  <div class="player-info bg-danger col-md-3" data-bind="visible: isTokyoInDispute">
-    <b><span data-bind="text: $root.playerDetails.inTokyo().name"></span></b>, would you like to stay in Tokyo? <br/>
-    <button class="btn btn-success" data-bind="click: stayInTokyo">Yes! I will stay here longer</button>
-    <button class="btn btn-danger" data-bind="click: fleeTokyo">No! I will flee</button>
-  </div>
-
-  <div class="player-info bg-info col-md-3" data-bind="with: turnResult">
-    <h3>Results</h3>
-    <table class="table table-border table-condensed">
-      <thead>
-        <tr>
-        <th>Points</th><th>Energy</th><th>Damage</th><th>Healed</th>
-      </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><span data-bind="text: pointsWon"></span></td>
-          <td><span data-bind="text: energyGained"></td>
-          <td><span data-bind="text: attackPower"></span></td>
-          <td><span data-bind="text: healedStatus"></span></td>
-        </tr>
-      </tbody>
-    </table>
-</div>
-</div>
-  </div>
-<!-- /ko -->
-</div>
+            <div class="row" data-bind="foreach: cardsToSell">
+                <div class="player-info bg-info col-md-2">
+                    <b></b>
+                    <h3 data-bind="text: name"><b></b></h3><b><span data-bind=
+                    "if: keep">[KEEP]</span> <span data-bind=
+                    "if: !keep">[DISCARD]</span></b><br>
+                    Cost: <span data-bind="text: cost"></span> Energy<br>
+                    Effect: <span data-bind="text: effect"></span><br>
+                    <button class="btn btn-success" data-bind=
+                    " click: function() { buy($parent, $parents[1].playerDetails.currentPlayer, $parents[1].playerDetails.players) }, visible: $parents[1].turnEnd.canBuy() && $parents[1].playerDetails.currentPlayer().energy() &gt;= cost - $parents[1].playerDetails.currentPlayer().discount()">
+                    Buy</button>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
 
 
+        <h2>Dice</h2>
+        <b>Rerolls Left:</b> <span data-bind=
+        "text: rolling.rerollsLeft()"></span><br>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4" data-bind="foreach: dice">
+                    <button class="btn col-md-2" data-bind=
+                    "text: faceShowing, css: {'btn-success': kept, 'btn-default': !kept()}, click: toggleKept">
+                    </button>
+                </div>
+
+                <div class="col-md-2">
+                    <button class="btn btn-large" data-bind=
+                    "visible: rolling.rerollsLeft() && !turnEnd.turnOver(), click: rolling.reroll">
+                    Reroll</button> <button class="btn btn-large" data-bind=
+                    "visible: !turnEnd. turnOver(), click: turnEnd.claim">Claim</button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ko with: turnEnd -->
+        <div class="container-fluid" data-bind="if: turnOver">
+            <div class="row">
+
+                <div class="player-info bg-success col-md-3" data-bind=
+                "visible: !isTokyoInDispute()">
+                    <h2>Turn Over</h2>This is your chance to buy any cards with
+                    your energy.<br>
+                    <button class="btn btn-success" data-bind=
+                    "click: nextTurn">Move on to Next Turn</button>
+                </div>
+
+
+                <div class="player-info bg-danger col-md-3" data-bind=
+                "visible: isTokyoInDispute">
+                    <b><span data-bind=
+                    "text: $root.playerDetails.inTokyo().name"></span></b>,
+                    would you like to stay in Tokyo?<br>
+                    <button class="btn btn-success" data-bind=
+                    "click: stayInTokyo">Yes! I will stay here longer</button>
+                    <button class="btn btn-danger" data-bind=
+                    "click: fleeTokyo">No! I will flee</button>
+                </div>
+
+
+                <div class="player-info bg-info col-md-3" data-bind=
+                "with: turnResult">
+                    <h3>Results</h3>
+                    <table class="table table-border table-condensed">
+                        <thead>
+                            <tr>
+                                <th>Points</th>
+                                <th>Energy</th>
+                                <th>Damage</th>
+                                <th>Healed</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span data-bind=
+                                "text: pointsWon"></span></td>
+                                <td><span data-bind=
+                                "text: energyGained"></span></td>
+                                <td><span data-bind=
+                                "text: attackPower"></span></td>
+                                <td><span data-bind=
+                                "text: healedStatus"></span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
 </body>
 </html>

@@ -6,6 +6,8 @@ define([], function() {
 
     var numberOfPaws = scores.attackPower;
 
+    console.log(numberOfPaws, scores);
+
     if(numberOfPaws === 0) {
       //No attack power
       return {
@@ -16,18 +18,19 @@ define([], function() {
     if(currentPlayerInTokyo && !isCurrentPlayerInTokyo) {
         //There is someone in Tokyo, but it's not me.
         currentPlayerInTokyo.takeDamage(numberOfPaws);
+
         if(!currentPlayerInTokyo.alive()) {
         //You have killed the current Tokyo player
         currentPlayer.isInTokyo(true);
         currentPlayerInTokyo.isInTokyo(false);
-                
+
         return {
           disputedTokyo: false
         }
         }
 
         return {
-          disputedTokyo: true
+          disputedTokyo: scores.canYield
         };
     }
 

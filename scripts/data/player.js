@@ -7,7 +7,7 @@ define(["ko", "util/min"], function(ko, min) {
       maxHealth: maxHealth,
       health: ko.observable(maxHealth()),
       points: ko.observable(0),
-      energy: ko.observable(0),
+      energy: ko.observable(10),
       currentPlayer: ko.observable(false),
       isInTokyo: ko.observable(false),
       cards: ko.observableArray(),
