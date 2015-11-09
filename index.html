@@ -53,11 +53,11 @@
   <!--ko with: cardDeck-->
   <div data-bind="foreach: cardsToSell">
     <div class="player-info bg-info">
-    <b><span data-bind="text: name"></span></b><br/>
+    <b><span data-bind="text: name"></span> <span data-bind="if: keep">[KEEP]</span> <span data-bind="if: !keep">[DISCARD]</span></b><br/>
     Cost: <span data-bind="text: cost"></span> Energy<br/>
     Effect: <span data-bind="text: effect"></span><br/>
     <button class="btn btn-success" data-bind="
-      click: function() { buy($parents[1].playerDetails.currentPlayer, $parent) },
+      click: function() { buy($parent, $parents[1].playerDetails.currentPlayer, $parents[1].playerDetails.players) },
       visible: $parents[1].turnEnd.turnOver && $parents[1].playerDetails.currentPlayer().energy() >= 2">Buy</button>
 
   </div><br/>

@@ -5,6 +5,7 @@ define(["cards/cardInterface", "util/diceCount"], function(Card, diceCount) {
   var cardDetails = {
     name: "All Different Bonus",
     cost: 2,
+    keep: true,
     effect: "If you roll all different symbols (1, 2, 3, Heart, Skull and Energy) you get 9 victory points",
     shortEffect: "123456 = 9 points",
     bespokeEffect: function(player) {

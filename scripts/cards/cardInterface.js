@@ -3,13 +3,14 @@ define([], function() {
     name: cardDetails.name,
     cost: cardDetails.cost,
     effect: cardDetails.effect,
+    keep: cardDetails.keep,
     shortEffect: cardDetails.shortEffect,
-    buy: function(player, cardDeck) {
-      player().cards.push(this);
+    buy: function(cardDeck, player, allPlayers) {
+      if(cardDetails.keep) { player().cards.push(this) };
       player().energy(player().energy() - cardDetails.cost)
       cardDeck.remove(this);
 
-      cardDetails.bespokeEffect(player);
+      cardDetails.bespokeEffect(player, allPlayers);
     }
   }};
 
