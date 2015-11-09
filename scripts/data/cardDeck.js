@@ -7,7 +7,8 @@ define(["ko", "lodash",
 "cards/omnivore", "cards/poisonQuills", "cards/rapidHealing",
 "cards/regeneration", "cards/skyscraper", "cards/spikedTail",
 "cards/tanks", "cards/vastStorm", "cards/evacuationOrders",
-"cards/energyHoarder", "cards/friendOfChildren", "cards/dedicatedNewsTeam"],
+"cards/energyHoarder", "cards/friendOfChildren", "cards/dedicatedNewsTeam",
+"cards/fireBlast"],
 function(ko, _,
   completeDestruction, evenBigger, extraHead,
   gasRefinery, giantBrain, apartmentBuilding,
@@ -17,7 +18,8 @@ function(ko, _,
   omnivore, poisonQuills, rapidHealing,
   regeneration, skyscraper, spikedTail,
   tanks, vastStorm, evacuationOrders,
-  energyHoarder, friendOfChildren, dedicatedNewsTeam) {
+  energyHoarder, friendOfChildren, dedicatedNewsTeam,
+  fireBlast) {
 
 //TODO: EnergyHoarder + FriendOfChildren interaction
 
@@ -26,7 +28,7 @@ function(ko, _,
     acidAttack, commuterTrain, cornerStore, energize, herbivore,
     jetFighters, nationalGuard, omnivore, poisonQuills, rapidHealing,
     regeneration, skyscraper, spikedTail, tanks, vastStorm, evacuationOrders,
-    dedicatedNewsTeam];
+    dedicatedNewsTeam, fireBlast];
   var cardsToSell = ko.observableArray([]);
 
   var addCardToSell = function() {
