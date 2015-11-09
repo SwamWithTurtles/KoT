@@ -6,8 +6,6 @@ define([], function() {
 
     var numberOfPaws = scores.attackPower;
 
-    console.log(numberOfPaws, scores);
-
     if(numberOfPaws === 0) {
       //No attack power
       return {
