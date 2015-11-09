@@ -10,10 +10,10 @@ requirejs(["ko", "lodash", "phases/rolling", "phases/turnEnd", "data/die", "data
 
 
     var dave = new Player("Dave");
-    var opponent = new Player("Monster A");
-    var opponent2 = new Player("Monster B");
+    var opponent = new Player("Alex");
+    //var opponent2 = new Player("Monster B");
 
-    var playerRoster = new PlayerRoster([dave, opponent, opponent2]);
+    var playerRoster = new PlayerRoster([dave, opponent]);
 
     var dice = ko.observable();
 

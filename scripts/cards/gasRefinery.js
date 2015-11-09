@@ -1,7 +1,7 @@
 define(["cards/cardInterface"], function(Card) {
   var cardDetails = {
     name: "Gas Refinery",
-    cost: 1,
+    cost: 6,
     keep: false,
     effect: "2 Points, and deal 3 damage to all other monsters",
     bespokeEffect: function(currentPlayer, allPlayers) {

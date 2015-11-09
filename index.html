@@ -27,9 +27,9 @@
   <h1>Players</h1>
 
   <!-- ko with: playerDetails -->
-  Remaining Alive: <span data-bind="text: numberAlive"></span>
-  <div data-bind="foreach: players">
-    <div class="player-info", data-bind="css: {'bg-warning': currentPlayer, 'bg-info': !currentPlayer(), 'bg-danger': !alive()}, style: {opacity: alive() ? 1 : 0.4}">
+  <div class="container-fluid" >
+    <div class="row" data-bind="foreach: players">
+    <div class="player-info col-md-3", data-bind="css: {'bg-warning': currentPlayer, 'bg-info': !currentPlayer(), 'bg-danger': !alive()}, style: {opacity: alive() ? 1 : 0.4}">
     <b><span data-bind="text: name"></span><span data-bind="visible: isInTokyo"> (in Tokyo)</span></b><br/>
     Health: <span data-bind="text: health"></span><br/>
     Points: <span data-bind="text: points"></span><br/>
@@ -42,8 +42,9 @@
     <!-- /ko -->
     <!-- /ko -->
 
-  </div><br/>
   </div>
+  </div>
+</div>
   <!-- /ko -->
 
   <h1>Tokyo</h1>
@@ -51,16 +52,17 @@
 
   <h1>Cards For Purchase</h1>
   <!--ko with: cardDeck-->
-  <div data-bind="foreach: cardsToSell">
-    <div class="player-info bg-info">
+  <div class="container-fluid" >
+    <div class="row" data-bind="foreach: cardsToSell">
+    <div class="player-info bg-info col-md-2">
     <b><span data-bind="text: name"></span> <span data-bind="if: keep">[KEEP]</span> <span data-bind="if: !keep">[DISCARD]</span></b><br/>
     Cost: <span data-bind="text: cost"></span> Energy<br/>
     Effect: <span data-bind="text: effect"></span><br/>
     <button class="btn btn-success" data-bind="
       click: function() { buy($parent, $parents[1].playerDetails.currentPlayer, $parents[1].playerDetails.players) },
-      visible: $parents[1].turnEnd.turnOver && $parents[1].playerDetails.currentPlayer().energy() >= cost">Buy</button>
-
-  </div><br/>
+      visible: $parents[1].turnEnd.canBuy && $parents[1].playerDetails.currentPlayer().energy() >= cost">Buy</button>
+  </div>
+</div>
   </div>
   <!-- /ko -->
 

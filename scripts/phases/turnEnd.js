@@ -23,6 +23,7 @@ define(["ko", "phases/scoring", "data/die", "phases/fighting"], function(ko, sco
 
     return {
       turnOver: turnOver,
+      canBuy: ko.computed(function() {return turnOver() && !isTokyoInDispute()}),
       turnResult: turnResult,
       claim: claim,
       nextTurn: nextTurn,
