@@ -27,8 +27,7 @@ function(ko, _,
 
 //TODO: EnergyHoarder + FriendOfChildren interaction
 
-var cardsInDeck = [plotTwist]
-  var z = [completeDestruction, evenBigger, extraHead, gasRefinery,
+  var cardsInDeck = [completeDestruction, evenBigger, extraHead, gasRefinery,
     giantBrain, apartmentBuilding, alienMetabolism, alphaMonster,
     acidAttack, commuterTrain, cornerStore, energize, herbivore,
     jetFighters, nationalGuard, omnivore, poisonQuills, rapidHealing,
