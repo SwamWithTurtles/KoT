@@ -1,6 +1,5 @@
-define(["ko", "data/die"], function(ko, Die) {
+define(["ko", "lodash", "data/die"], function(ko, _, Die) {
   return function(dice) {
-
     var rerollsLeft = ko.observable(2);
 
     var reroll = function() {
@@ -15,8 +14,9 @@ define(["ko", "data/die"], function(ko, Die) {
     return {
       rerollsLeft: rerollsLeft,
       reroll: reroll,
-      resetRerolls: function(rolls) {
+      resetRerolls: function(rolls, numOfDice) {
         rerollsLeft(rolls);
+        dice(_.map(_.fill(Array(numOfDice), "1"), function() {return new Die()}));
       }
     }
   }

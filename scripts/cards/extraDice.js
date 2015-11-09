@@ -1,12 +1,12 @@
 define(["cards/cardInterface"], function(Card) {
   var cardDetails = {
-    name: "Giant Brain",
-    cost: 5,
+    name: "Extra Head",
+    cost: 7,
     keep: true,
-    shortEffect: "+1 reroll",
-    effect: "You have one extra reroll each turn.",
+    shortEffect: "+1 die",
+    effect: "You get 1 extra die",
     bespokeEffect: function(player) {
-      player().rerolls(player().rerolls() + 1);
+      player().dice(player().dice() + 1);
     }
   };
 

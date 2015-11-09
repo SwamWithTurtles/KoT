@@ -1,22 +1,22 @@
 define(["cards/cardInterface", "util/diceCount"], function(Card, diceCount) {
 
-  var isUniqueAmongstDice = function(dice, sym) {return diceCount.symbolCount(dice, sym) === 1};
+  var existsAmongDice = function(dice, sym) {return diceCount.symbolCount(dice, sym) >= 1};
 
   var cardDetails = {
-    name: "All Different Bonus",
-    cost: 2,
+    name: "Complete Destruction",
+    cost: 3,
     keep: true,
-    effect: "If you roll all different symbols (1, 2, 3, Heart, Skull and Energy) you get 9 victory points",
-    shortEffect: "123456 = 9 points",
+    effect: "If you roll 1, 2, 3, Heart, Paw, Energy gain 9 points in addition to the regular results",
+    shortEffect: "123HPE = 9 points",
     bespokeEffect: function(player) {
       player().additionalScoring.push(
         function(dice) {
-          var allDifferent = isUniqueAmongstDice(dice, "1") &&
-          isUniqueAmongstDice(dice, "2") &&
-          isUniqueAmongstDice(dice, "3") &&
-          isUniqueAmongstDice(dice, "Energy") &&
-          isUniqueAmongstDice(dice, "Paw") &&
-          isUniqueAmongstDice(dice, "Heart")
+          var allDifferent = existsAmongDice(dice, "1") &&
+          existsAmongDice(dice, "2") &&
+          existsAmongDice(dice, "3") &&
+          existsAmongDice(dice, "Energy") &&
+          existsAmongDice(dice, "Paw") &&
+          existsAmongDice(dice, "Heart")
 
           return {
             points: allDifferent ? 9 : 0,

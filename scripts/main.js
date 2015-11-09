@@ -15,10 +15,11 @@ requirejs(["ko", "lodash", "phases/rolling", "phases/turnEnd", "data/die", "data
 
     var playerRoster = new PlayerRoster([dave, opponent, opponent2]);
 
-    var dice = ko.observable([new Die(), new Die(), new Die(), new Die(), new Die(), new Die()]);
-
+    var dice = ko.observable();
 
     var rerollingModel = rolling(dice);
+    rerollingModel.resetRerolls(playerRoster.currentPlayer().rerolls(), playerRoster.currentPlayer().dice());
+
     var turnEndModel = turnEnd(dice, playerRoster, rerollingModel.resetRerolls);
 
     var viewModel = {

@@ -1,12 +1,15 @@
 define(["cards/cardInterface"], function(Card) {
   var cardDetails = {
-    name: "Damage All Players",
-    cost: 2,
+    name: "Gas Refinery",
+    cost: 1,
     keep: false,
-    effect: "Deal two damage to all players",
-    bespokeEffect: function(player, allPlayers) {
+    effect: "2 Points, and deal 3 damage to all other monsters",
+    bespokeEffect: function(currentPlayer, allPlayers) {
+      currentPlayer().addPoints(2);
       _.forEach(allPlayers, function(player) {
-        player.takeDamage(2);
+        if(player.name !== currentPlayer().name) {
+          player.takeDamage(3);
+        }
       })
     }
   };

@@ -58,7 +58,7 @@
     Effect: <span data-bind="text: effect"></span><br/>
     <button class="btn btn-success" data-bind="
       click: function() { buy($parent, $parents[1].playerDetails.currentPlayer, $parents[1].playerDetails.players) },
-      visible: $parents[1].turnEnd.turnOver && $parents[1].playerDetails.currentPlayer().energy() >= 2">Buy</button>
+      visible: $parents[1].turnEnd.turnOver && $parents[1].playerDetails.currentPlayer().energy() >= cost">Buy</button>
 
   </div><br/>
   </div>

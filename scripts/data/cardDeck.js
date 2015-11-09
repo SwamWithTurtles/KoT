@@ -1,8 +1,8 @@
 define(["ko", "lodash",
 "cards/moreLife", "cards/allDifferent", "cards/damageAll",
-"cards/additionalReroll"], function(ko, _, moreLife, allDifferent, damageAll, additionalReroll) {
+"cards/additionalReroll", "cards/extraDice"], function(ko, _, moreLife, allDifferent, damageAll, additionalReroll, extraDice) {
 
-  var cardsInDeck = [moreLife, allDifferent, damageAll, additionalReroll];
+  var cardsInDeck = [moreLife, allDifferent, damageAll, additionalReroll, extraDice];
   var cardsToSell = ko.observableArray([]);
 
   var addCardToSell = function() {
