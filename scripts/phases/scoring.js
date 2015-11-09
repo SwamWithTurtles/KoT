@@ -23,7 +23,9 @@ define(["ko", "lodash", "util/min", "util/diceCount"], function(ko, _, min, dice
       healedFor += additionalPoints.heal;
 
       //Some cards give the ability to damage without giving the opponent a chance to yield
-      nonTokyoAttack += additionalPoints.nonTokyoAttack;
+      if(additionalPoints.nonTokyoAttack) {
+        nonTokyoAttack += additionalPoints.nonTokyoAttack;
+      }
     });
 
     var scores = {
