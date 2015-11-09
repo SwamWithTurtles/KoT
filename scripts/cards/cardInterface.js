@@ -8,6 +8,7 @@ define([], function() {
     buy: function(cardDeck, player, allPlayers) {
       if(cardDetails.keep) { player().cards.push(this) };
       player().energy(player().energy() - cardDetails.cost + player().discount())
+      player().addPoints(player().cardBuyReward());
       cardDeck.remove(this);
 
       cardDetails.bespokeEffect(player, allPlayers);
