@@ -7,7 +7,7 @@ define([], function() {
     shortEffect: cardDetails.shortEffect,
     buy: function(cardDeck, player, allPlayers) {
       if(cardDetails.keep) { player().cards.push(this) };
-      player().energy(player().energy() - cardDetails.cost)
+      player().energy(player().energy() - cardDetails.cost + player().discount())
       cardDeck.remove(this);
 
       cardDetails.bespokeEffect(player, allPlayers);

@@ -57,7 +57,7 @@
     Effect: <span data-bind="text: effect"></span><br/>
     <button class="btn btn-success" data-bind="
       click: function() { buy($parent, $parents[1].playerDetails.currentPlayer, $parents[1].playerDetails.players) },
-      visible: $parents[1].turnEnd.canBuy && $parents[1].playerDetails.currentPlayer().energy() >= cost">Buy</button>
+      visible: $parents[1].turnEnd.canBuy && $parents[1].playerDetails.currentPlayer().energy() >= cost - $parents[1].playerDetails.currentPlayer().discount()">Buy</button>
   </div>
 </div>
   </div>
@@ -76,6 +76,7 @@
 <!-- ko with: turnEnd -->
 <button class="btn btn-large" data-bind="visible: !turnOver(), click: claim">Claim</button>
 
+<h2>Turn Over</h2>
   <div class="container-fluid" data-bind="if: turnOver">
     <div class="row">
 

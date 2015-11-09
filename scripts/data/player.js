@@ -13,6 +13,7 @@ define(["ko", "util/min"], function(ko, min) {
       cards: ko.observableArray(),
       rerolls: ko.observable(2),
       dice: ko.observable(6),
+      discount: ko.observable(0),
       additionalScoring: ko.observableArray()
     }
 
