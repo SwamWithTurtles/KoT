@@ -1,11 +1,7 @@
-define(["ko", "lodash", "util/min"], function(ko, _, min) {
+define(["ko", "lodash", "util/min", "util/diceCount"], function(ko, _, min, diceCount) {
   return function(dice, currentPlayer) {
-    var numberOfDiceWithSymbol = function(symbol) {
-      var relevantDice = _.filter(dice(), function(die) {
-        return die.faceShowing === symbol;
-      });
-      return relevantDice.length;
-    }
+
+    var numberOfDiceWithSymbol = function(sym) { return diceCount.symbolCount(dice(), sym) };
 
     var pointsWonFor = function(num) {
       var relevantDiceCount = numberOfDiceWithSymbol(num.toString());
@@ -16,6 +12,15 @@ define(["ko", "lodash", "util/min"], function(ko, _, min) {
     var energyGained = numberOfDiceWithSymbol("Energy");
     var attackPower = numberOfDiceWithSymbol("Paw");
     var healedFor = numberOfDiceWithSymbol("Heart");
+
+    _.forEach(currentPlayer.additionalScoring(), function(scoreMechanism) {
+      var additionalPoints = scoreMechanism(dice());
+
+      pointsWon += additionalPoints.points;
+      attackPower += additionalPoints.attack;
+      energyGained += additionalPoints.energy;
+      healedFor += additionalPoints.heal;
+    });
 
     var scores = {
       pointsWon: pointsWon,

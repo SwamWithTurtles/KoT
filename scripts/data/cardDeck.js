@@ -1,6 +1,6 @@
-define(["ko", "lodash", "cards/moreLife"], function(ko, _, moreLife) {
+define(["ko", "lodash", "cards/moreLife", "cards/allDifferent"], function(ko, _, moreLife, allDifferent) {
 
-  var cardsInDeck = [moreLife];
+  var cardsInDeck = [moreLife, allDifferent];
   var cardsToSell = ko.observableArray([]);
 
   var addCardToSell = function() {

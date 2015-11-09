@@ -10,7 +10,8 @@ define(["ko", "util/min"], function(ko, min) {
       energy: ko.observable(0),
       currentPlayer: ko.observable(false),
       isInTokyo: ko.observable(false),
-      cards: ko.observableArray()
+      cards: ko.observableArray(),
+      additionalScoring: ko.observableArray()
     }
 
     stats.resolve = function(scores) {
