@@ -6,7 +6,7 @@ define(["ko", "lodash",
 "cards/herbivore", "cards/jetFighters", "cards/nationalGuard",
 "cards/omnivore", "cards/poisonQuills", "cards/rapidHealing",
 "cards/regeneration", "cards/skyscraper", "cards/spikedTail",
-"cards/tanks"],
+"cards/tanks", "cards/vastStorm"],
 function(ko, _,
   completeDestruction, evenBigger, extraHead,
   gasRefinery, giantBrain, apartmentBuilding,
@@ -15,13 +15,13 @@ function(ko, _,
   herbivore, jetFighters, nationalGuard,
   omnivore, poisonQuills, rapidHealing,
   regeneration, skyscraper, spikedTail,
-  tanks) {
+  tanks, vastStorm) {
 
   var cardsInDeck = [completeDestruction, evenBigger, extraHead, gasRefinery,
     giantBrain, apartmentBuilding, alienMetabolism, alphaMonster,
     acidAttack, commuterTrain, cornerStore, energize, herbivore,
     jetFighters, nationalGuard, omnivore, poisonQuills, rapidHealing,
-    regeneration, skyscraper, spikedTail, tanks];
+    regeneration, skyscraper, spikedTail, tanks, vastStorm];
   var cardsToSell = ko.observableArray([]);
 
   var addCardToSell = function() {
