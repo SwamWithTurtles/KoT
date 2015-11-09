@@ -1,14 +1,16 @@
 define(["ko", "util/min"], function(ko, min) {
   return function(name) {
-    var maxHealth = 10;
+    var maxHealth = ko.observable(10);
 
     var stats = {
       name: name,
-      health: ko.observable(maxHealth),
+      maxHealth: maxHealth,
+      health: ko.observable(maxHealth()),
       points: ko.observable(0),
       energy: ko.observable(0),
       currentPlayer: ko.observable(false),
-      isInTokyo: ko.observable(false)
+      isInTokyo: ko.observable(false),
+      cards: ko.observableArray()
     }
 
     stats.resolve = function(scores) {
@@ -17,7 +19,7 @@ define(["ko", "util/min"], function(ko, min) {
         stats.energy(stats.energy() + scores.energyGained);
 
         if (!stats.isInTokyo()) {
-          stats.health(min(stats.health() + scores.healedFor, 10));
+          stats.health(min(stats.health() + scores.healedFor, maxHealth()));
         }
       }
     }

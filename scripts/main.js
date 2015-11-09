@@ -6,7 +6,7 @@ requirejs.config({
     }
 });
 
-requirejs(["ko", "lodash", "phases/rolling", "phases/turnEnd", "data/die", "data/player", "data/playerRoster"], function(ko, _, rolling, turnEnd, Die, Player, PlayerRoster) {
+requirejs(["ko", "lodash", "phases/rolling", "phases/turnEnd", "data/die", "data/player", "data/playerRoster", "data/cardDeck"], function(ko, _, rolling, turnEnd, Die, Player, PlayerRoster, CardDeck) {
 
 
     var dave = new Player("Dave");
@@ -24,6 +24,7 @@ requirejs(["ko", "lodash", "phases/rolling", "phases/turnEnd", "data/die", "data
     var viewModel = {
         playerDetails: playerRoster,
         dice: dice,
+        cardDeck: new CardDeck(),
 
         rolling: rerollingModel,
         turnEnd: turnEndModel

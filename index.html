@@ -33,7 +33,15 @@
     <b><span data-bind="text: name"></span><span data-bind="visible: isInTokyo"> (in Tokyo)</span></b><br/>
     Health: <span data-bind="text: health"></span><br/>
     Points: <span data-bind="text: points"></span><br/>
-    Energy: <span data-bind="text: energy"></span>
+    Energy: <span data-bind="text: energy"></span><br/>
+
+    <!-- ko if: cards().length > 0 -->
+    <br/><b>Cards</b><br/>
+    <!-- ko foreach: cards -->
+      <b> <span data-bind="text: name"></span></b> (<span data-bind="text: shortEffect"></span>)
+    <!-- /ko -->
+    <!-- /ko -->
+
   </div><br/>
   </div>
   <!-- /ko -->
@@ -41,7 +49,20 @@
   <h1>Tokyo</h1>
   <b>In Tokyo:</b> <span data-bind="text: playerDetails.inTokyo().name"></span>
 
+  <h1>Cards For Purchase</h1>
+  <!--ko with: cardDeck-->
+  <div data-bind="foreach: cardsToSell">
+    <div class="player-info bg-info">
+    <b><span data-bind="text: name"></span></b><br/>
+    Cost: <span data-bind="text: cost"></span> Energy<br/>
+    Effect: <span data-bind="text: effect"></span><br/>
+    <button class="btn btn-success" data-bind="
+      click: function() { buy($parents[1].playerDetails.currentPlayer, $parent) },
+      visible: $parents[1].turnEnd.turnOver && $parents[1].playerDetails.currentPlayer().energy() >= 2">Buy</button>
 
+  </div><br/>
+  </div>
+  <!-- /ko -->
 
   <h1>Dice</h1>
     <b>Rerolls Left:</b> <span data-bind="text: rolling.rerollsLeft()"></span>
@@ -64,7 +85,7 @@
   </div>
 
   <div class="player-info bg-success" data-bind="visible: !isTokyoInDispute()">
-    The turn is over and the scores are in! <br/>
+    This is your chance to buy any cards with your energy. <br/>
     <button class="btn btn-success" data-bind="click: nextTurn">Move on to Next Turn</button>
   </div>
 
