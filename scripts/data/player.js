@@ -1,6 +1,7 @@
 define(["ko", "util/min"], function(ko, min) {
   return function(name) {
     var maxHealth = ko.observable(10);
+    var armorPlating = ko.observable(false);
 
     var stats = {
       name: name,
@@ -16,6 +17,7 @@ define(["ko", "util/min"], function(ko, min) {
       discount: ko.observable(0),
       cardBuyReward: ko.observable(0),
       activations: ko.observableArray(),
+      armorPlating: armorPlating,
       additionalScoring: ko.observableArray()
     }
 
@@ -38,6 +40,7 @@ define(["ko", "util/min"], function(ko, min) {
 
     stats.takeDamage = function(damage) {
       if (stats.alive()) {
+        if(armorPlating && damage === 1) {return;}
         stats.health(stats.health() - damage);
       }
     }
