@@ -1,0 +1,82 @@
+<html>
+<head>
+    <script src="bower_components/requirejs/require.js" data-main="scripts/main"></script>
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+    <style>
+        body {
+            margin: 15px;
+        }
+
+        .player-info {
+          border: 1px solid black;
+          padding: 3px;
+          margin: 3px;
+        }
+    </style>
+</head>
+<body>
+  <div data-bind="visible: playerDetails.gameOver" class="player-info bg-warning">
+    <h1>The Game Is Over!</h1>
+
+    <p>Congratulations, <b data-bind="text: playerDetails.winner"></b></p>
+
+      <button class="btn btn-primary" onclick="location.reload()">Play Again?</button>
+  </div>
+
+  <div class="player-info" data-bind="style: {opacity: playerDetails.gameOver() ? 0.4 : 1}">
+  <h1>Players</h1>
+
+  <!-- ko with: playerDetails -->
+  Remaining Alive: <span data-bind="text: numberAlive"></span>
+  <div data-bind="foreach: players">
+    <div class="player-info", data-bind="css: {'bg-warning': currentPlayer, 'bg-info': !currentPlayer(), 'bg-danger': !alive()}, style: {opacity: alive() ? 1 : 0.4}">
+    <b><span data-bind="text: name"></span><span data-bind="visible: isInTokyo"> (in Tokyo)</span></b><br/>
+    Health: <span data-bind="text: health"></span><br/>
+    Points: <span data-bind="text: points"></span><br/>
+    Energy: <span data-bind="text: energy"></span>
+  </div><br/>
+  </div>
+  <!-- /ko -->
+
+  <h1>Tokyo</h1>
+  <b>In Tokyo:</b> <span data-bind="text: playerDetails.inTokyo().name"></span>
+
+
+
+  <h1>Dice</h1>
+    <b>Rerolls Left:</b> <span data-bind="text: rolling.rerollsLeft()"></span>
+  <div data-bind="foreach: dice">
+      <button class="btn" data-bind="text: faceShowing, css: {'btn-success': kept, 'btn-default': !kept()}, click: toggleKept"></span>
+  </div>
+
+    <button class="btn btn-large" data-bind="visible: rolling.rerollsLeft() && !turnEnd.turnOver(), click: rolling.reroll">Reroll</button>
+
+<!-- ko with: turnEnd -->
+<button class="btn btn-large" data-bind="visible: !turnOver(), click: claim">Claim</button>
+
+  <div data-bind="if: turnOver">
+    <div class="player-info bg-info" data-bind="with: turnResult">
+      <h3>Turn over</h3>
+      <b>Points Gained:</b> <span data-bind="text: pointsWon"></span><br/>
+      <b>Energy Gained:</b> <span data-bind="text: energyGained"></span><br/>
+      <b>Damage Dealt:</b> <span data-bind="text: attackPower"></span><br/>
+      <b>Healed For:</b> <span data-bind="text: healedStatus"></span><br/>
+  </div>
+
+  <div class="player-info bg-success" data-bind="visible: !isTokyoInDispute()">
+    The turn is over and the scores are in! <br/>
+    <button class="btn btn-success" data-bind="click: nextTurn">Move on to Next Turn</button>
+  </div>
+
+  <div class="player-info bg-danger" data-bind="visible: isTokyoInDispute">
+    <b><span data-bind="text: $root.playerDetails.inTokyo().name"></span></b>, would you like to stay in Tokyo? <br/>
+    <button class="btn btn-success" data-bind="click: stayInTokyo">Yes! I will stay here longer</button>
+    <button class="btn btn-danger" data-bind="click: fleeTokyo">No! I will flee</button>
+  </div>
+  </div>
+<!-- /ko -->
+</div>
+
+
+</body>
+</html>
