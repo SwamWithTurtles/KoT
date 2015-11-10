@@ -3,13 +3,14 @@ define(["ko", "util/min"], function(ko, min) {
     var maxHealth = ko.observable(5);
     var armorPlating = ko.observable(false);
     var preventDamageThisTurn = ko.observable(false);
+    var singleTurnDiceChange = ko.observable(0);
 
     var stats = {
       name: name,
       maxHealth: maxHealth,
       health: ko.observable(maxHealth()),
       points: ko.observable(0),
-      energy: ko.observable(10),
+      energy: ko.observable(100),
       currentPlayer: ko.observable(false),
       isInTokyo: ko.observable(false),
       cards: ko.observableArray(),
@@ -23,9 +24,22 @@ define(["ko", "util/min"], function(ko, min) {
       armorPlating: armorPlating,
       additionalScoring: ko.observableArray(),
       endTurnHooks: ko.observableArray(),
+      deathTrigger: function() {},
+
+      //temoporary
       preventDamageThisTurn: preventDamageThisTurn,
-      deathTrigger: function() {}
+      singleTurnDiceChange: singleTurnDiceChange,
+
+      reset: function() {
+        preventDamageThisTurn(false);
+        singleTurnDiceChange(0);
+      }
+
     }
+
+    stats.numOfDice = ko.computed(function() {
+      return stats.dice() - stats.shrinkTokens() + stats.singleTurnDiceChange()
+    })
 
     stats.resolve = function(scores) {
       if (stats.alive()) {

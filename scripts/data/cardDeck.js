@@ -13,7 +13,8 @@ define(["ko", "lodash",
 "cards/plotTwist", "cards/telepath", "cards/stretchy",
 "cards/smokeCloud", "cards/dropFromHighAltitude", "cards/solarPowered",
 "cards/rootingForTheUnderdog", "cards/urbavore", "cards/eaterOfTheDead",
-"cards/shrinkRay", "cards/wings", "cards/frenzy"],
+"cards/shrinkRay", "cards/wings", "cards/frenzy",
+"cards/freezeTime"],
 function(ko, _,
   completeDestruction, evenBigger, extraHead,
   gasRefinery, giantBrain, apartmentBuilding,
@@ -29,10 +30,10 @@ function(ko, _,
   plotTwist, telepath, stretchy,
   smokeCloud, dropFromHighAltitude, solarPowered,
   rootingForTheUnderdog, urbavore, eaterOfTheDead,
-  shrinkRay, wings, frenzy) {
+  shrinkRay, wings, frenzy,
+  freezeTime) {
 
-var cardsInDeck = [frenzy];
-  var cardsInDecak = [completeDestruction, evenBigger, extraHead, gasRefinery,
+  var cardsInDeck = [completeDestruction, evenBigger, extraHead, gasRefinery,
     giantBrain, apartmentBuilding, alienMetabolism, alphaMonster,
     acidAttack, commuterTrain, cornerStore, energize, herbivore,
     jetFighters, nationalGuard, omnivore, poisonQuills, rapidHealing,

@@ -18,7 +18,7 @@ requirejs(["ko", "lodash", "phases/rolling", "phases/turnEnd", "data/die", "data
     var dice = ko.observable();
 
     var rerollingModel = rolling(dice);
-    rerollingModel.resetRerolls(playerRoster.currentPlayer().rerolls(), playerRoster.currentPlayer().dice() - playerRoster.currentPlayer().shrinkTokens());
+    rerollingModel.resetRerolls(playerRoster.currentPlayer().rerolls(), playerRoster.currentPlayer().numOfDice());
 
     var turnEndModel = turnEnd(dice, playerRoster, rerollingModel.resetRerolls);
 

@@ -15,7 +15,6 @@ define(["ko", "phases/scoring", "data/die", "phases/fighting"], function(ko, sco
       shrinkTokenRemoval(0);
       pointsTallied(false);
       _.forEach(playerDetails.currentPlayer().endTurnHooks(), function(hook) {hook(playerDetails.currentPlayer());})
-      _.forEach(playerDetails.players, function(player) {player.preventDamageThisTurn(false)});
       var currentPlayer;
       if(extraTurn()) {
         currentPlayer = extraTurn();
@@ -23,7 +22,10 @@ define(["ko", "phases/scoring", "data/die", "phases/fighting"], function(ko, sco
       } else {
          currentPlayer = playerDetails.advancePlayerTurn();
       }
-      resetRerolls(currentPlayer.rerolls(), currentPlayer.dice() - currentPlayer.shrinkTokens());
+      resetRerolls(currentPlayer.rerolls(), currentPlayer.numOfDice());
+      _.forEach(playerDetails.players, function(player) {
+        player.reset();
+      });
       if (currentPlayer.isInTokyo()) {
         currentPlayer.addPoints(currentPlayer.tokyoBonus());
       }
