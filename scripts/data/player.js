@@ -2,6 +2,7 @@ define(["ko", "util/min"], function(ko, min) {
   return function(name) {
     var maxHealth = ko.observable(5);
     var armorPlating = ko.observable(false);
+    var preventDamageThisTurn = ko.observable(false);
 
     var stats = {
       name: name,
@@ -22,6 +23,7 @@ define(["ko", "util/min"], function(ko, min) {
       armorPlating: armorPlating,
       additionalScoring: ko.observableArray(),
       endTurnHooks: ko.observableArray(),
+      preventDamageThisTurn: preventDamageThisTurn,
       deathTrigger: function() {}
     }
 
@@ -50,6 +52,7 @@ define(["ko", "util/min"], function(ko, min) {
     stats.takeDamage = function(damage, shrinkTokens) {
       if (stats.alive()) {
         if(armorPlating() && damage === 1) {return;}
+        if(preventDamageThisTurn()) {return;}
         if(shrinkTokens) {stats.shrinkTokens(stats.shrinkTokens() + shrinkTokens)}
         stats.health(stats.health() - damage);
       }

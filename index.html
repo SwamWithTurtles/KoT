@@ -36,7 +36,8 @@
                 <div class="player-info col-md-3" data-bind=
                 "css: {'bg-warning': currentPlayer, 'bg-info': !currentPlayer(), 'bg-danger': !alive()}, style: {opacity: alive() ? 1 : 0.4}">
                 <b><span data-bind="text: name"></span> <span data-bind=
-                "visible: isInTokyo">(in Tokyo)</span></b><br>
+                "visible: isInTokyo" class="btn btn-xs btn-danger" style="font-variant: small-caps">In Tokyo</span></b> <span data-bind="visible: preventDamageThisTurn" style="font-variant: small-caps" class="btn btn-success btn-xs">Immune from Damage</span>
+                <br/>
                     Health: <span data-bind="text: health"></span><br>
                     Points: <span data-bind="text: points"></span><br>
                     <div data-bind="visible: shrinkTokens() > 0">Shrink Tokens: <span data-bind="text: shrinkTokens"></span></div>
