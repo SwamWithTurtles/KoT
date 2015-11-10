@@ -72,7 +72,7 @@ define(["ko"], function(ko) {
           playerIndex((playerIndex() + 1) % playerList.length);
         }
         if (currentPlayer().isInTokyo()) {
-          currentPlayer().addPoints(2);
+          currentPlayer().addPoints(currentPlayer().tokyoBonus());
         }
         return currentPlayer();
       },

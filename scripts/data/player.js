@@ -16,6 +16,7 @@ define(["ko", "util/min"], function(ko, min) {
       dice: ko.observable(6),
       discount: ko.observable(0),
       cardBuyReward: ko.observable(0),
+      tokyoBonus: ko.observable(2),
       activations: ko.observableArray(),
       armorPlating: armorPlating,
       additionalScoring: ko.observableArray(),
