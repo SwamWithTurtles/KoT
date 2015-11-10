@@ -1,6 +1,6 @@
 define(["ko", "util/min"], function(ko, min) {
   return function(name) {
-    var maxHealth = ko.observable(10);
+    var maxHealth = ko.observable(2);
     var armorPlating = ko.observable(false);
 
     var stats = {
@@ -20,7 +20,8 @@ define(["ko", "util/min"], function(ko, min) {
       activations: ko.observableArray(),
       armorPlating: armorPlating,
       additionalScoring: ko.observableArray(),
-      endTurnHooks: ko.observableArray()
+      endTurnHooks: ko.observableArray(),
+      deathTrigger: function() {}
     }
 
     stats.resolve = function(scores) {

@@ -1,6 +1,8 @@
 define(["ko"], function(ko) {
 
   return function(playerList) {
+    var legacyNumAlive = playerList.length; //This is used to trigger correctly when multiple die at the same time.
+
     var setActivePlayer = function() {
       _.forEach(playerList, function(player, ix) {
         setAsActivePlayer(player, playerIndex() === ix);
@@ -85,6 +87,16 @@ define(["ko"], function(ko) {
         });
       }
     }
+
+    var deathTriggers = function() {
+      _.forEach(alivePlayers(), function(player) {
+        player.deathTrigger();
+      });
+    }
+
+    roster.numberAlive.subscribe(function(newVal, oldVal) {
+      _.times(legacyNumAlive - newVal, deathTriggers)
+    });
 
     return roster;
   }
