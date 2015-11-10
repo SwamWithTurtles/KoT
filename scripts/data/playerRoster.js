@@ -89,13 +89,16 @@ define(["ko"], function(ko) {
     }
 
     var deathTriggers = function() {
+      console.log("sad");
       _.forEach(alivePlayers(), function(player) {
         player.deathTrigger();
       });
     }
 
     roster.numberAlive.subscribe(function(newVal, oldVal) {
-      _.times(legacyNumAlive - newVal, deathTriggers)
+      if(newVal > 1) {
+        _.times(legacyNumAlive - newVal, deathTriggers)
+      }
     });
 
     return roster;

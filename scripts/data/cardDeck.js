@@ -12,7 +12,7 @@ define(["ko", "lodash",
 "cards/highAltitudeBombing", "cards/heal", "cards/nuclearPowerPlant",
 "cards/plotTwist", "cards/telepath", "cards/stretchy",
 "cards/smokeCloud", "cards/dropFromHighAltitude", "cards/solarPowered",
-"cards/rootingForTheUnderdog", "cards/urbavore"],
+"cards/rootingForTheUnderdog", "cards/urbavore", "cards/eaterOfTheDead"],
 function(ko, _,
   completeDestruction, evenBigger, extraHead,
   gasRefinery, giantBrain, apartmentBuilding,
@@ -27,7 +27,7 @@ function(ko, _,
   highAltitudeBombing, heal, nuclearPowerPlant,
   plotTwist, telepath, stretchy,
   smokeCloud, dropFromHighAltitude, solarPowered,
-  rootingForTheUnderdog, urbavore) {
+  rootingForTheUnderdog, urbavore, eaterOfTheDead) {
 
   var cardsInDeck = [completeDestruction, evenBigger, extraHead, gasRefinery,
     giantBrain, apartmentBuilding, alienMetabolism, alphaMonster,
@@ -37,7 +37,7 @@ function(ko, _,
     energyHoarder, friendOfChildren, dedicatedNewsTeam, fireBlast, armorPlating,
     gourmet, highAltitudeBombing, heal, nuclearPowerPlant, plotTwist, telepath,
     stretchy, smokeCloud, dropFromHighAltitude, solarPowered, rootingForTheUnderdog,
-    urbavore];
+    urbavore, eaterOfTheDead];
   var cardsToSell = ko.observableArray([]);
 
   var addCardToSell = function() {
