@@ -1,6 +1,6 @@
 define(["ko", "util/min"], function(ko, min) {
   return function(name) {
-    var maxHealth = ko.observable(2);
+    var maxHealth = ko.observable(5);
     var armorPlating = ko.observable(false);
 
     var stats = {
@@ -47,9 +47,10 @@ define(["ko", "util/min"], function(ko, min) {
       }
     }
 
-    stats.takeDamage = function(damage) {
+    stats.takeDamage = function(damage, shrinkTokens) {
       if (stats.alive()) {
         if(armorPlating() && damage === 1) {return;}
+        if(shrinkTokens) {stats.shrinkTokens(stats.shrinkTokens() + shrinkTokens)}
         stats.health(stats.health() - damage);
       }
     }

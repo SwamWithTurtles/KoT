@@ -12,6 +12,7 @@ define(["ko", "lodash", "util/min", "util/diceCount"], function(ko, _, min, dice
     var energyGained = numberOfDiceWithSymbol("Energy");
     var attackPower = numberOfDiceWithSymbol("Paw");
     var healedFor = numberOfDiceWithSymbol("Heart") - shrinkTokenRemoval();
+    var shrinkTokens = 0;
     var nonTokyoAttack = 0;
 
     _.forEach(currentPlayer.additionalScoring(), function(scoreMechanism) {
@@ -21,6 +22,7 @@ define(["ko", "lodash", "util/min", "util/diceCount"], function(ko, _, min, dice
       attackPower += additionalPoints.attack;
       energyGained += additionalPoints.energy;
       healedFor += additionalPoints.heal;
+      shrinkTokens += additionalPoints.shrinkTokens ? additionalPoints.shrinkTokens : 0;
 
       //Some cards give the ability to damage without giving the opponent a chance to yield
       if(additionalPoints.nonTokyoAttack) {
@@ -31,6 +33,7 @@ define(["ko", "lodash", "util/min", "util/diceCount"], function(ko, _, min, dice
     var scores = {
       pointsWon: pointsWon,
       attackPower: attackPower + nonTokyoAttack,
+      shrinkTokens: shrinkTokens,
       canYield: attackPower > 0,
       energyGained: energyGained,
       healedFor: healedFor,

@@ -5,6 +5,7 @@ define([], function() {
     var isCurrentPlayerInTokyo = currentPlayer.isInTokyo();
 
     var numberOfPaws = scores.attackPower;
+    var shrinkTokens = scores.shrinkTokens;
 
     if(numberOfPaws === 0) {
       //No attack power
@@ -15,7 +16,7 @@ define([], function() {
 
     if(currentPlayerInTokyo && !isCurrentPlayerInTokyo) {
         //There is someone in Tokyo, but it's not me.
-        currentPlayerInTokyo.takeDamage(numberOfPaws);
+        currentPlayerInTokyo.takeDamage(numberOfPaws, shrinkTokens);
 
         if(!currentPlayerInTokyo.alive()) {
         //You have killed the current Tokyo player
@@ -36,7 +37,7 @@ define([], function() {
       //I am in Tokyo
       var allOtherPlayers = _.without(playerDetails.players, currentPlayer);
       _.forEach(allOtherPlayers, function(player) {
-        player.takeDamage(numberOfPaws);
+        player.takeDamage(numberOfPaws, shrinkTokens);
       })
       return {
         disputedTokyo: false
