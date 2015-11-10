@@ -11,7 +11,8 @@ define(["ko", "lodash",
 "cards/fireBlast", "cards/armorPlating", "cards/gourmet",
 "cards/highAltitudeBombing", "cards/heal", "cards/nuclearPowerPlant",
 "cards/plotTwist", "cards/telepath", "cards/stretchy",
-"cards/smokeCloud", "cards/dropFromHighAltitude", "cards/solarPowered"],
+"cards/smokeCloud", "cards/dropFromHighAltitude", "cards/solarPowered",
+"cards/rootingForTheUnderdog"],
 function(ko, _,
   completeDestruction, evenBigger, extraHead,
   gasRefinery, giantBrain, apartmentBuilding,
@@ -25,9 +26,10 @@ function(ko, _,
   fireBlast, armorPlating, gourmet,
   highAltitudeBombing, heal, nuclearPowerPlant,
   plotTwist, telepath, stretchy,
-  smokeCloud, dropFromHighAltitude, solarPowered) {
+  smokeCloud, dropFromHighAltitude, solarPowered,
+  rootingForTheUnderdog) {
 
-var cardsInDeck = [solarPowered, telepath];
+var cardsInDeck = [solarPowered, telepath, rootingForTheUnderdog];
   var foo = [completeDestruction, evenBigger, extraHead, gasRefinery,
     giantBrain, apartmentBuilding, alienMetabolism, alphaMonster,
     acidAttack, commuterTrain, cornerStore, energize, herbivore,
@@ -35,7 +37,7 @@ var cardsInDeck = [solarPowered, telepath];
     regeneration, skyscraper, spikedTail, tanks, vastStorm, evacuationOrders,
     energyHoarder, friendOfChildren, dedicatedNewsTeam, fireBlast, armorPlating,
     gourmet, highAltitudeBombing, heal, nuclearPowerPlant, plotTwist, telepath,
-    stretchy, smokeCloud, dropFromHighAltitude, solarPowered];
+    stretchy, smokeCloud, dropFromHighAltitude, solarPowered, rootingForTheUnderdog];
   var cardsToSell = ko.observableArray([]);
 
   var addCardToSell = function() {

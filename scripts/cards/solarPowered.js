@@ -2,7 +2,7 @@ define(["cards/cardInterface"], function(Card) {
 
   var cardDetails = {
     name: "Solar Powered",
-    cost: 3,
+    cost: 2,
     keep: true,
     effect: "At the end of your turn gain 1 Energy if you have no Energy.",
     shortEffect: "6 energy = 1 point",
