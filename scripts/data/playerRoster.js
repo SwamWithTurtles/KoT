@@ -72,10 +72,7 @@ define(["ko"], function(ko) {
         playerIndex((playerIndex() + 1) % playerList.length);
         while(!currentPlayer().alive()) {
           playerIndex((playerIndex() + 1) % playerList.length);
-        }
-        if (currentPlayer().isInTokyo()) {
-          currentPlayer().addPoints(currentPlayer().tokyoBonus());
-        }
+        }        
         return currentPlayer();
       },
       currentPlayer: currentPlayer,

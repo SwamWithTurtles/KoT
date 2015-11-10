@@ -8,14 +8,25 @@ define(["ko", "phases/scoring", "data/die", "phases/fighting"], function(ko, sco
     var isTokyoInDispute = ko.observable(false);
     var shrinkTokenRemoval = ko.observable(0);
 
+    var extraTurn = ko.observable(false);
+
     var nextTurn = function() {
       turnOver(false);
       shrinkTokenRemoval(0);
       pointsTallied(false);
       _.forEach(playerDetails.currentPlayer().endTurnHooks(), function(hook) {hook(playerDetails.currentPlayer());})
       _.forEach(playerDetails.players, function(player) {player.preventDamageThisTurn(false)});
-      var currentPlayer = playerDetails.advancePlayerTurn();
+      var currentPlayer;
+      if(extraTurn()) {
+        currentPlayer = extraTurn();
+        extraTurn(false);
+      } else {
+         currentPlayer = playerDetails.advancePlayerTurn();
+      }
       resetRerolls(currentPlayer.rerolls(), currentPlayer.dice() - currentPlayer.shrinkTokens());
+      if (currentPlayer.isInTokyo()) {
+        currentPlayer.addPoints(currentPlayer.tokyoBonus());
+      }
     }
 
     var claim = function() {
@@ -48,7 +59,8 @@ define(["ko", "phases/scoring", "data/die", "phases/fighting"], function(ko, sco
       },
       stayInTokyo: function() {
         isTokyoInDispute(false);
-      }
+      },
+      extraTurn: extraTurn
     };
   };
 })
