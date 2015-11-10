@@ -27,16 +27,15 @@ function(ko, _,
   plotTwist, telepath, stretchy,
   smokeCloud, dropFromHighAltitude) {
 
-//TODO: EnergyHoarder + FriendOfChildren interaction
-
-  var cardsInDeck = [completeDestruction, evenBigger, extraHead, gasRefinery,
+var cardsInDeck = [energyHoarder];
+  var foo = [completeDestruction, evenBigger, extraHead, gasRefinery,
     giantBrain, apartmentBuilding, alienMetabolism, alphaMonster,
     acidAttack, commuterTrain, cornerStore, energize, herbivore,
     jetFighters, nationalGuard, omnivore, poisonQuills, rapidHealing,
     regeneration, skyscraper, spikedTail, tanks, vastStorm, evacuationOrders,
-    dedicatedNewsTeam, fireBlast, armorPlating, gourmet, highAltitudeBombing,
-    heal, nuclearPowerPlant, plotTwist, telepath, stretchy, smokeCloud,
-    dropFromHighAltitude];
+    energyHoarder, friendOfChildren, dedicatedNewsTeam, fireBlast, armorPlating,
+    gourmet, highAltitudeBombing, heal, nuclearPowerPlant, plotTwist, telepath,
+    stretchy, smokeCloud, dropFromHighAltitude];
   var cardsToSell = ko.observableArray([]);
 
   var addCardToSell = function() {

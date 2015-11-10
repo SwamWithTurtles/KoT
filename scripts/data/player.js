@@ -18,7 +18,8 @@ define(["ko", "util/min"], function(ko, min) {
       cardBuyReward: ko.observable(0),
       activations: ko.observableArray(),
       armorPlating: armorPlating,
-      additionalScoring: ko.observableArray()
+      additionalScoring: ko.observableArray(),
+      endTurnHooks: ko.observableArray()
     }
 
     stats.resolve = function(scores) {

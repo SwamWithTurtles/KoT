@@ -7,19 +7,11 @@ define(["cards/cardInterface", "util/diceCount"], function(Card, diceCount) {
     effect: "You gain 1 point for every 6 energy you have at the end of your turn.",
     shortEffect: "6 energy = 1 point",
     bespokeEffect: function(player) {
-      var currentPlayer = player();
+      var addPoints = function(_player) {
+        _player.addPoints(Math.floor(_player.energy() / 6));
+      }      
 
-      player().additionalScoring.push(
-        function(dice) {
-
-          return {
-            points: Math.floor((currentPlayer.energy() + diceCount.symbolCount(dice, "Energy")) / 6),
-            attack: 0,
-            energy: 0,
-            heal: 0
-          }
-        }
-      );
+      player().endTurnHooks.push(addPoints);
     }
   };
 

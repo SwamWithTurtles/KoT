@@ -10,6 +10,7 @@ define(["ko", "phases/scoring", "data/die", "phases/fighting"], function(ko, sco
     var nextTurn = function() {
       turnOver(false);
       pointsTallied(false);
+      _.forEach(playerDetails.currentPlayer().endTurnHooks(), function(hook) {hook(playerDetails.currentPlayer());})
       var currentPlayer = playerDetails.advancePlayerTurn();
       resetRerolls(currentPlayer.rerolls(), currentPlayer.dice());
     }
