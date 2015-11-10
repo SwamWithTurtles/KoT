@@ -1,4 +1,4 @@
-define(["ko", "lodash", "data/die"], function(ko, _, Die) {
+define(["ko", "lodash", "data/die", "util/diceCount"], function(ko, _, Die, diceCount) {
   return function(dice) {
     var rerollsLeft = ko.observable(2);
     var isChangingRoll = ko.observable(false);
@@ -22,6 +22,9 @@ define(["ko", "lodash", "data/die"], function(ko, _, Die) {
 
     return {
       changingRoll: isChangingRoll,
+      numberOfHearts: ko.computed(function() {
+        return diceCount.symbolCount(dice(), "Heart");
+      }),
       rerollsLeft: rerollsLeft,
       reroll: reroll,
       resetRerolls: function(rolls, numOfDice) {

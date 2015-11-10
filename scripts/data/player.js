@@ -17,6 +17,7 @@ define(["ko", "util/min"], function(ko, min) {
       discount: ko.observable(0),
       cardBuyReward: ko.observable(0),
       tokyoBonus: ko.observable(2),
+      shrinkTokens: ko.observable(0),
       activations: ko.observableArray(),
       armorPlating: armorPlating,
       additionalScoring: ko.observableArray(),
@@ -28,6 +29,7 @@ define(["ko", "util/min"], function(ko, min) {
       if (stats.alive()) {
         stats.points(stats.points() + scores.pointsWon);
         stats.energy(stats.energy() + scores.energyGained);
+        stats.shrinkTokens(stats.shrinkTokens() - scores.shrinkTokenRemoval);
 
         if (!stats.isInTokyo()) {
             stats.heal(scores.healedFor);

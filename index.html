@@ -39,6 +39,7 @@
                 "visible: isInTokyo">(in Tokyo)</span></b><br>
                     Health: <span data-bind="text: health"></span><br>
                     Points: <span data-bind="text: points"></span><br>
+                    <div data-bind="visible: shrinkTokens() > 0">Shrink Tokens: <span data-bind="text: shrinkTokens"></span></div>
                     Energy: <span data-bind="text: energy"></span><br>
                       <!-- ko if: activations().length > 0 -->
                       <br/><b>Abilities</b><br />
@@ -138,6 +139,20 @@
                 <div class="player-info bg-info col-md-3">
                     <h3>Results</h3>
                     <div data-bind="visible: !pointsTallied()">
+
+                      <div data-bind="visible: $root.playerDetails.currentPlayer().shrinkTokens() > 0 && $root.rolling.numberOfHearts() > 0">
+                        You rolled <span data-bind="text:$root.rolling.numberOfHearts"></span> hearts.<br/>
+                        You are currently using <span data-bind="text: shrinkTokenRemoval"></span> of them for removing shrink tokens.
+                        <button class="btn btn-xs btn-info"
+                          data-bind="attr: {disabled: shrinkTokenRemoval() >= $root.rolling.numberOfHearts() || shrinkTokenRemoval() >= $root.playerDetails.currentPlayer().shrinkTokens()},
+                          click: function() {shrinkTokenRemoval(shrinkTokenRemoval() + 1)}">+</button>
+
+                        <button class="btn btn-xs btn-info"
+                          data-bind="attr: {disabled: shrinkTokenRemoval() <= 0},
+                          click: function() {shrinkTokenRemoval(shrinkTokenRemoval() - 1)}">-</button>
+
+                      </div>
+
                       <button class="btn btn-xl btn-primary" data-bind="click: tallyPoints">Resolve Dice</button>
                     </div>
                     <table class="table table-border table-condensed" data-bind="visible: pointsTallied, with: turnResult">
@@ -157,8 +172,9 @@
                                 "text: energyGained"></span></td>
                                 <td><span data-bind=
                                 "text: attackPower"></span></td>
-                                <td><span data-bind=
-                                "text: healedStatus"></span></td>
+                                <td>
+                                  <span data-bind="text: healedStatus"></span>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

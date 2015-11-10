@@ -1,5 +1,5 @@
 define(["ko", "lodash", "util/min", "util/diceCount"], function(ko, _, min, diceCount) {
-  return function(dice, currentPlayer) {
+  return function(dice, currentPlayer, shrinkTokenRemoval) {
 
     var numberOfDiceWithSymbol = function(sym) { return diceCount.symbolCount(dice(), sym) };
 
@@ -11,7 +11,7 @@ define(["ko", "lodash", "util/min", "util/diceCount"], function(ko, _, min, dice
     var pointsWon = pointsWonFor(1) + pointsWonFor(2) + pointsWonFor(3);
     var energyGained = numberOfDiceWithSymbol("Energy");
     var attackPower = numberOfDiceWithSymbol("Paw");
-    var healedFor = numberOfDiceWithSymbol("Heart");
+    var healedFor = numberOfDiceWithSymbol("Heart") - shrinkTokenRemoval();
     var nonTokyoAttack = 0;
 
     _.forEach(currentPlayer.additionalScoring(), function(scoreMechanism) {
@@ -34,6 +34,7 @@ define(["ko", "lodash", "util/min", "util/diceCount"], function(ko, _, min, dice
       canYield: attackPower > 0,
       energyGained: energyGained,
       healedFor: healedFor,
+      shrinkTokenRemoval: shrinkTokenRemoval(),
       healedStatus: (function() {
         if(currentPlayer.isInTokyo()) { return "Cannot Heal in Tokyo"}
 
