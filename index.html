@@ -60,9 +60,10 @@
                 </div>
             </div>
         </div><!-- /ko -->
-        <h2>Cards For Purchase</h2>
 
         <!--ko with: cardDeck-->
+        <h2>Cards For Purchase  <button class="btn btn-warning" data-bind="click: function() {flush(); $parents[0].playerDetails.currentPlayer().energy( $parents[0].playerDetails.currentPlayer().energy() - 2)}, visible: $parents[0].turnEnd.canBuy() && $parents[0].playerDetails.currentPlayer().energy() &gt;= 2">Flush (2 Energy)</button></h2>
+
         <div class="container-fluid">
 
             <div class="row" data-bind="foreach: cardsToSell">

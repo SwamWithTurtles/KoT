@@ -44,6 +44,12 @@ function(ko, _,
     urbavore, eaterOfTheDead, wings];
   var cardsToSell = ko.observableArray([]);
 
+
+  var flush = function() {
+    cardsToSell([]);
+    _.times(3, addCardToSell);
+  }
+
   var addCardToSell = function() {
       if(cardsInDeck.length === 0) { return; }
 
@@ -53,10 +59,11 @@ function(ko, _,
   }
 
   //Start With Three Cards to Sell
-  _.times(3, addCardToSell);
+  flush();
 
   return function() { return {
     cardsToSell: cardsToSell,
+    flush: flush,
     remove: function(card) {
       cardsToSell.remove(card);
       addCardToSell();
